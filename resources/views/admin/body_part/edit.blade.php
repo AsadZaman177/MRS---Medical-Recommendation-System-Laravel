@@ -1,0 +1,75 @@
+@extends('admin.layouts.master')
+
+@section('title', 'Edit Body Part')
+
+@section('content')
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Edit Body Part</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ url('medicines/body_part') }}">Body parts</a></li>
+                        <li class="breadcrumb-item active">Edit Body Part</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <form action="{{ url('medicines/body_part/update') }}" method="POST">
+                        <input type="hidden" name="id" value="{{ $body_part->id }}">
+                        @csrf
+                        <div class="card card-primary card-outline">
+                            <div class="card-header align-content-center d-flex">
+                                <h3 class="card-title mr-auto p-2"><i class="fas fa-edit"></i> Edit New</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="body_part">Body Part</label>
+                                    <input type="text" class="form-control {{ $errors -> has('body_part') ? 'is-invalid' : '' }}" name="body_part" value="{{ $body_part->body_part }}" id="body_part" placeholder="E.g Head">
+                                    @error('body_part')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="symptoms">Symptoms</label>
+                                    <select class="select2 {{ $errors -> has('symptoms') ? 'is-invalid' : '' }}" multiple="multiple" data-placeholder="Select Symptoms" name="symptoms[]" style="width: 100%;">
+                                        @foreach ($symptoms as $symptom)
+                                            <option @foreach ($body_part->symptoms as $bs) @if($bs->id == $symptom->id) selected @endif @endforeach value="{{ $symptom->id }}">{{ $symptom->symptom }}</option>
+                                        @endforeach  
+                                    </select>
+                                    @error('symptoms')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+@endsection
+
+@section('javscript')
+    
+@endsection

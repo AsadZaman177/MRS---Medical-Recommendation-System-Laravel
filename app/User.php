@@ -36,4 +36,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // User Has User Details
+    public function userDetail()
+    {
+        return $this->hasOne('App\UserDetail');
+    }
+
+    // User Has Many Checkouts
+    public function checkouts()
+    {
+        return $this->hasMany('App\Checkout');
+    }
 }

@@ -33,7 +33,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="medicines" class="table table-sm table-bordered table-striped table-responsive">
+                                <table id="medicines" class="table table-sm table-bordered table-striped table-sm">
                                     <thead>
                                         <tr class="text-center">
                                             <th>#</th>
@@ -54,6 +54,7 @@
                                             <th>Sale Price</th>
                                             <th>Featured</th>
                                             <th>Stock</th>
+                                            <th>Current Stock</th>
                                             <th>Updated At</th>
                                             <th>Action</th>
                                         </tr>
@@ -104,6 +105,15 @@
                                                     <span class="badge badge-success badge-pill">{{ $medicine->stock }}</span>
                                                     @endif
                                                 </td>
+                                                <td>
+                                                    @if ($medicine->remaining_stock == '0' )
+                                                        <span class="badge badge-danger badge-pill">Out Of Stock</span>
+                                                    @elseif($medicine->remaining_stock)
+                                                    <span class="badge badge-success badge-pill">{{ $medicine->remaining_stock }}</span>
+                                                    @else
+                                                        <span class="badge badge-success badge-pill">{{ $medicine->stock }}</span>
+                                                    @endif
+                                                </td>
                                                 <td>{{ $medicine->updated_at }}</td>
                                                 <td>
                                                     <div class="btn-group">
@@ -140,7 +150,7 @@
                 "responsive": true,
                 "scrollX": true,
                 "columnDefs": [
-                    { className: "dt-nowrap", "targets": [ 0,1,2,3,4,5,6,7,8,9,10,11,12,13,,14,15,16,17,18,19,20 ] }
+                    { className: "dt-nowrap", "targets": [ 0,1,2,3,4,5,6,7,8,9,10,11,12,13,,14,15,16,17,18,19,20,21 ] }
                 ],
             });
         });

@@ -1,17 +1,11 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-        <img src="{{ asset('backend/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-            style="opacity: .8">
-        <span class="brand-text font-weight-light">MRS</span>
-    </a>
-
+   
       <!-- Sidebar -->
       <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           <div class="image">
-              <img src="{{ asset('backend/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
+              <img src="{{ asset('images/user-avator.png') }}" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
             <a href="#" class="d-block">{{ Auth::user()->name }}</a>
@@ -30,6 +24,14 @@
               </a>
             </li>
 
+            <!-- Users -->
+            <li class="nav-item">
+              <a href="{{ url('/users') }}" class="nav-link {{ (request()->is('users*')) ? 'active' : '' }}">
+                <i class="nav-icon fas fa-user"></i>
+                <p>Users Managment</p>
+              </a>
+            </li>
+
             <!-- Medicines -->
             <li class="nav-item {{ (request()->is('medicines*')) ? 'menu-open' : '' }}">
               <a href="#" class="nav-link {{ (request()->is('medicines*')) ? 'active' : '' }}">
@@ -41,7 +43,7 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="{{ url('medicines/') }}" class="nav-link {{ (request()->is('medicines/type*')) ? 'active' : '' }}">
+                  <a href="{{ url('medicines/') }}" class="nav-link {{ (request()->is('medicines*')) ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>All Medicines</p>
                   </a>
@@ -187,29 +189,106 @@
               </a>
             </li>
 
-            <!-- Coupon Code -->
+            <!-- Orders -->
             <li class="nav-item">
-              <a href="{{ url('/coupon') }}" class="nav-link {{ (request()->is('coupon*')) ? 'active' : '' }}">
-                <i class="nav-icon fas fa-gift"></i>
-                <p>Coupons Code</p>
+              <a href="{{ url('/orders') }}" class="nav-link {{ (request()->is('orders*')) ? 'active' : '' }}">
+                <i class="nav-icon fas fa-shopping-cart"></i>
+                <p>Orders</p>
               </a>
             </li>
 
-            <!-- Tax  -->
             <li class="nav-item">
-              <a href="{{ url('/tax') }}" class="nav-link {{ (request()->is('tax*')) ? 'active' : '' }}">
-                <i class="nav-icon fas fa-percent"></i>
-                <p>Tax Rate</p>
+              <a href="{{ url('/orders/processing') }}" class="nav-link {{ (request()->is('/orders/processing')) ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-clock"></i>
+                  <p>Processing Orders</p>
               </a>
             </li>
 
-            <!-- Shipping Charges  -->
             <li class="nav-item">
-              <a href="{{ url('/shipping') }}" class="nav-link {{ (request()->is('shipping*')) ? 'active' : '' }}">
-                <i class="nav-icon fas fa-shipping-fast"></i>
-                <p>Shipping Charges</p>
+                <a href="{{ url('orders/delivered') }}" class="nav-link {{ (request()->is('orders/delivered')) ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-truck"></i>
+                    <p>Deliever Orders</p>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="{{ url('orders/onhold') }}" class="nav-link {{ (request()->is('orders/onhold')) ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-pause"></i>
+                    <p>OnHold Orders</p>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="{{ url('orders/completed') }}" class="nav-link {{ (request()->is('orders/completed')) ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-check-circle"></i>
+                    <p>Completed Orders</p>
+                </a>
+            </li>
+
+            <!-- Reviews -->
+            <li class="nav-item">
+              <a href="{{ url('/reviews') }}" class="nav-link {{ (request()->is('reviews*')) ? 'active' : '' }}">
+                <i class="nav-icon fas fa-star"></i>
+                <p>Medicine Reviews</p>
               </a>
             </li>
+
+            <!-- Contact Messages -->
+            <li class="nav-item">
+              <a href="{{ url('/contact') }}" class="nav-link {{ (request()->is('contact*')) ? 'active' : '' }}">
+                <i class="nav-icon fas fa-envelope"></i>
+                <p>Contact Messages</p>
+              </a>
+            </li>
+
+            <!-- Reports -->
+            <li class="nav-item {{ (request()->is('reports*')) ? 'menu-open' : '' }}">
+              <a href="#" class="nav-link {{ (request()->is('reports*')) ? 'active' : '' }}">
+                <i class="nav-icon fa fa-file"></i>
+                <p>
+                  Reports
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{ url('reports/sales-report/') }}" class="nav-link {{ (request()->is('reports/sales-report')) ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Sales Report</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="{{ url('reports/products-sales-report/') }}" class="nav-link {{ (request()->is('reports/products-sales-report')) ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Products Sales Report</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="{{ url('reports/products-stock-report/') }}" class="nav-link {{ (request()->is('reports/products-stock-report')) ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Products Stock Report</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="{{ url('reports/payments-report/') }}" class="nav-link {{ (request()->is('reports/payments-report')) ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Payments Report</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="{{ url('reports/reviews-report/') }}" class="nav-link {{ (request()->is('reports/reviews-report')) ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Reviews Report</p>
+                  </a>
+                </li>
+
+              </ul>
+            </li>
+           
 
           </ul>
         </nav>

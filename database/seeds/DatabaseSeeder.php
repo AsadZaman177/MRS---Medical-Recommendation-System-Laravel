@@ -15,7 +15,9 @@ class DatabaseSeeder extends Seeder
       $this->call(CMSSeeder::class);
       $this->call(NewsSeeder::class);
       $this->call(TestimonialSeeder::class);
-      $this->call(TaxSeeder::class);
-      $this->call(ShippingChargesSeeder::class);
+      $this->call(MedicineTypeSeeder::class);
+      $this->call(MedicineFormulaeSeeder::class);
+      $this->call(MedicineBrandSeeder::class);
+      $this->call(MedicineCompanySeeder::class);
     }
 }

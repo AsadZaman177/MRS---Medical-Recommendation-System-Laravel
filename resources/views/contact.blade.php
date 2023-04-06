@@ -69,9 +69,28 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
+                    @if($errors->any())
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+                    @if(session()->has('success'))
+                        <div class="alert alert-success alert-dismissible text-center" role="alert">
+                            {{ session()->get('success') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
                     <div class="ltn__form-box contact-form-box box-shadow white-bg">
                         <h4 class="title-2">Get A Quote</h4>
-                        <form id="contact-form" action="https://tunatheme.com/tf/html/vicodin-preview/vicodin/mail.php" method="post">
+                        <form action="{{ url('/store/contact') }}" method="post">
+                            @csrf
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="input-item input-item-name ltn__custom-icon">
@@ -100,7 +119,6 @@
                             <div class="btn-wrapper mt-0">
                                 <button class="btn theme-btn-1 btn-effect-1 text-uppercase" type="submit">get a free service</button>
                             </div>
-                            <p class="form-messege mb-0 mt-20"></p>
                         </form>
                     </div>
                 </div>

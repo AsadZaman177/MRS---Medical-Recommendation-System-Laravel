@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\TypeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,26 +22,67 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/about', 'HomeController@about');
 Route::get('/search-medcine','HomeController@search_medicine');
+// Search Medicine
+Route::post('/search-med','HomeController@searchMedicine');
 Route::get('/smart-doctor','HomeController@smart_doctor');
+// get BodyPart related Symptoms
+Route::get('/symptoms/{body_part_id}', 'HomeController@getSymptoms');
+Route::post('/recomend','HomeController@recomend');
 Route::get('/shop','HomeController@shop');
 Route::get('/shop/{slug}','HomeController@product_details');
 Route::get('/news','HomeController@news');
 Route::get('/news/{slug}','HomeController@news_single');
-Route::get('/contact','HomeController@contact');
+Route::get('/contact-us','HomeController@contact');
+Route::post('store/contact','HomeController@postContact');
 Route::get('/terms-and-conditions','HomeController@terms_conditions');
 Route::get('/privacy-policy','HomeController@privacy_policy');
+
+// Cart Routes
+Route::get('/cart', 'CartController@index');
+Route::get('add-to-cart/{id}', 'CartController@addToCart');
+Route::patch('update-cart', 'CartController@update');
+Route::delete('remove-from-cart', 'CartController@remove');
+
+// Checkout Routes
+Route::get('/checkout', 'CheckoutController@index');
+Route::post('store/checkout', 'CheckoutController@store');
+
+Route::get('track-order','HomeController@trackOrder');
+Route::post('track-order-result','HomeController@posttrackOrder');
+
+// Reviews
+Route::post('review/store', 'MedicineReviewController@store');
 
 // Backend Routes
 Route::group(['middleware' => 'auth'], function(){ 
     
     // User Routes
     Route::get('user/dashboard', 'User\UserController@index');
+    Route::get('user/profile', 'User\UserController@profile');
+    Route::post('user/profile/update', 'User\UserController@updateProfile');
+    Route::get('user/orders', 'User\UserController@orders');
+    Route::get('user/orders/view/{id}', 'User\UserController@viewOrder');
+    Route::get('user/orders/processing', 'User\UserController@processingOrders');
+    Route::get('user/orders/delivered', 'User\UserController@deliveredOrders');
+    Route::get('user/orders/onhold', 'User\UserController@onholdOrders');
+    Route::get('user/orders/completed', 'User\UserController@completedOrders');
+
         
     //Admin Routes
     Route::group(['middleware' => 'is_admin'], function(){ 
 
         //Admin Dashboad 
         Route::get('/dashboard', 'Admin\DashboardController@index');
+
+        // User Routes
+        Route::prefix('users')->name('users.')->group(function () { 
+            Route::get('/', 'Admin\UserController@index');
+            Route::get('/create', 'Admin\UserController@create');
+            Route::post('/store', 'Admin\UserController@store');
+            Route::get('/edit/{id}', 'Admin\UserController@edit');
+            Route::post('/update', 'Admin\UserController@update');
+            Route::get('/delete/{id}', 'Admin\UserController@delete');
+        });
 
         //CMS Routes
         Route::prefix('cms')->name('cms.')->group(function () { 
@@ -82,28 +124,6 @@ Route::group(['middleware' => 'auth'], function(){
             Route::get('/edit/{id}', 'Admin\TestimonialController@edit');
             Route::post('/update', 'Admin\TestimonialController@update');
             Route::get('/delete/{id}', 'Admin\TestimonialController@delete');
-        });
-
-        // Coupon Code 
-        Route::prefix('coupon')->name('coupon.')->group(function () { 
-            Route::get('/', 'Admin\CouponController@index');
-            Route::get('/create', 'Admin\CouponController@create');
-            Route::post('/store', 'Admin\CouponController@store');
-            Route::get('/edit/{id}', 'Admin\CouponController@edit');
-            Route::post('/update', 'Admin\CouponController@update');
-            Route::get('/delete/{id}', 'Admin\CouponController@delete');
-        });
-
-        //Tax Route
-        Route::prefix('tax')->name('tax.')->group(function () { 
-            Route::get('/', 'Admin\TaxController@index');
-            Route::post('/store', 'Admin\TaxController@store');
-        });
-
-        //Shipping Charges Route
-        Route::prefix('shipping')->name('shipping.')->group(function () { 
-            Route::get('/', 'Admin\ShippingController@index');
-            Route::post('/store', 'Admin\ShippingController@store');
         });
 
 
@@ -212,6 +232,40 @@ Route::group(['middleware' => 'auth'], function(){
             // get BodyPart related Symptoms
             Route::get('/getSymptoms/{body_part_id}', 'Admin\MedicineController@getSymptoms');
         });
+
+        // Order Routes
+        Route::prefix('orders')->name('orders.')->group(function () { 
+            Route::get('/', 'Admin\OrderController@index');
+            Route::get('/edit/{id}', 'Admin\OrderController@edit');
+            Route::post('/update', 'Admin\OrderController@update');
+            Route::get('/delete/{id}', 'Admin\OrderController@delete');
+            Route::get('/processing', 'Admin\OrderController@processingOrders');
+            Route::get('/delivered', 'Admin\OrderController@deliveredOrders');
+            Route::get('/onhold', 'Admin\OrderController@onholdOrders');
+            Route::get('/completed', 'Admin\OrderController@completedOrders');
+        });
+
+        // Medicine Reviews
+        Route::prefix('reviews')->name('reviews.')->group(function () { 
+            Route::get('/', 'MedicineReviewController@index');
+            Route::get('/delete/{id}', 'MedicineReviewController@delete');
+        });
+
+        // Contact 
+        Route::prefix('contact')->name('contact.')->group(function () { 
+            Route::get('/', 'Admin\ContactController@index');
+            Route::get('/delete/{id}', 'Admin\ContactController@delete');
+        });
+
+        // Reports
+        Route::prefix('reports')->name('reports.')->group(function () { 
+            Route::get('/sales-report', 'Admin\ReportController@index');
+            Route::get('/products-sales-report', 'Admin\ReportController@productSalesReport');
+            Route::get('/products-stock-report', 'Admin\ReportController@productStockReport');
+            Route::get('/payments-report', 'Admin\ReportController@PaymentsReport');
+            Route::get('/reviews-report', 'Admin\ReportController@ReviewsReport');
+        });
+        
 
 
     });

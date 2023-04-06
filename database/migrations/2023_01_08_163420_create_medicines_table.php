@@ -34,6 +34,7 @@ class CreateMedicinesTable extends Migration
             $table->decimal('price')->nullable();
             $table->decimal('sale_price')->nullable();
             $table->integer('stock')->nullable();
+            $table->integer('remaining_stock')->nullable();
             $table->longText('description');
             $table->foreignId('created_by')->constrained('users');
             $table->timestamps();

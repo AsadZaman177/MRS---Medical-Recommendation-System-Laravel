@@ -27,16 +27,18 @@
             </div>
             <div class="col-lg-6">
                 <div class="ltn__breadcrumb-list">
-                    <form id="#123" method="get" action="#">
-                        <input type="text" class="form-control" name="name" placeholder="Search Here...">
+                    <form action="{{ url('/search-med') }}" method="POST">
+                        @csrf
+                        <input type="text" class="form-control" name="search" placeholder="Search Here..." required>
+                        <!--
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="type" id="generic" value="generic">
+                            <input class="form-check-input" type="radio" name="type" id="formuale" value="Formule">
                             <label class="form-check-label" for="generic"><strong style="color: #000">Generic</strong></label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="type" id="brand" value="brand">
-                            <label class="form-check-label" for="brand"><strong style="color: #000">Brand</strong></label>
-                          </div>
+                        </div>
+                        <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="type" id="brand" value="brand">
+                        <label class="form-check-label" for="brand"><strong style="color: #000">Brand</strong></label>
+                        </div> -->
                           <button type="submit" class="theme-btn-1 btn btn-effect-1 text-uppercase">Search Now</button>
                     </form>
 
@@ -47,188 +49,5 @@
 </div>
 <!-- BREADCRUMB AREA END -->
 
-<!-- SEARCH Resultt -->
-<div class="ltn__small-product-list-area section-bg-1 pt-115 pb-90 mb-120">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section-title-area ltn__section-title-2 text-center">
-                    <h1 class="section-title">Search Result</h1>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <!-- small-product-item -->
-            <div class="col-lg-4 col-md-6 col-12">
-                <div class="ltn__small-product-item">
-                    <div class="small-product-item-img">
-                        <a href="product-details.html"><img src="{{ asset('frontend/img/product/1.png') }}"
-                                alt="Image"></a>
-                    </div>
-                    <div class="small-product-item-info">
-                        <div class="product-ratting">
-                            <ul>
-                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-                                <li><a href="#"><i class="far fa-star"></i></a></li>
-                            </ul>
-                        </div>
-                        <h2 class="product-title"><a href="product-details.html">Antiseptic Spray</a></h2>
-                        <h2 class="product-title">Brand: Vamol</h2>
-                        <h2 class="product-title">Manufacturer: Vamol Pharma</h2>
-                        <div class="product-price">
-                            <span>$129.00</span>
-                            <del>$140.00</del>
-                        </div>
-                        <a href="#" class="product-price">Add To Cart</a>
-                    </div>
-                </div>
-            </div>
-            <!-- small-product-item -->
-            <div class="col-lg-4 col-md-6 col-12">
-                <div class="ltn__small-product-item">
-                    <div class="small-product-item-img">
-                        <a href="product-details.html"><img src="{{ asset('frontend/img/product/1.png') }}"
-                                alt="Image"></a>
-                    </div>
-                    <div class="small-product-item-info">
-                        <div class="product-ratting">
-                            <ul>
-                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-                                <li><a href="#"><i class="far fa-star"></i></a></li>
-                            </ul>
-                        </div>
-                        <h2 class="product-title"><a href="product-details.html">Antiseptic Spray</a></h2>
-                        <h2 class="product-title">Brand: Vamol</h2>
-                        <h2 class="product-title">Manufacturer: Vamol Pharma</h2>
-                        <div class="product-price">
-                            <span>$129.00</span>
-                            <del>$140.00</del>
-                        </div>
-                        <a href="#" class="product-price">Add To Cart</a>
-                    </div>
-                </div>
-            </div>
-            <!-- small-product-item -->
-            <div class="col-lg-4 col-md-6 col-12">
-                <div class="ltn__small-product-item">
-                    <div class="small-product-item-img">
-                        <a href="product-details.html"><img src="{{ asset('frontend/img/product/1.png') }}"
-                                alt="Image"></a>
-                    </div>
-                    <div class="small-product-item-info">
-                        <div class="product-ratting">
-                            <ul>
-                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-                                <li><a href="#"><i class="far fa-star"></i></a></li>
-                            </ul>
-                        </div>
-                        <h2 class="product-title"><a href="product-details.html">Antiseptic Spray</a></h2>
-                        <h2 class="product-title">Brand: Vamol</h2>
-                        <h2 class="product-title">Manufacturer: Vamol Pharma</h2>
-                        <div class="product-price">
-                            <span>$129.00</span>
-                            <del>$140.00</del>
-                        </div>
-                        <a href="#" class="product-price">Add To Cart</a>
-                    </div>
-                </div>
-            </div>
-            <!-- small-product-item -->
-            <div class="col-lg-4 col-md-6 col-12">
-                <div class="ltn__small-product-item">
-                    <div class="small-product-item-img">
-                        <a href="product-details.html"><img src="{{ asset('frontend/img/product/1.png') }}"
-                                alt="Image"></a>
-                    </div>
-                    <div class="small-product-item-info">
-                        <div class="product-ratting">
-                            <ul>
-                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-                                <li><a href="#"><i class="far fa-star"></i></a></li>
-                            </ul>
-                        </div>
-                        <h2 class="product-title"><a href="product-details.html">Antiseptic Spray</a></h2>
-                        <h2 class="product-title">Brand: Vamol</h2>
-                        <h2 class="product-title">Manufacturer: Vamol Pharma</h2>
-                        <div class="product-price">
-                            <span>$129.00</span>
-                            <del>$140.00</del>
-                        </div>
-                        <a href="#" class="product-price">Add To Cart</a>
-                    </div>
-                </div>
-            </div>
-            <!-- small-product-item -->
-            <div class="col-lg-4 col-md-6 col-12">
-                <div class="ltn__small-product-item">
-                    <div class="small-product-item-img">
-                        <a href="product-details.html"><img src="{{ asset('frontend/img/product/1.png') }}"
-                                alt="Image"></a>
-                    </div>
-                    <div class="small-product-item-info">
-                        <div class="product-ratting">
-                            <ul>
-                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-                                <li><a href="#"><i class="far fa-star"></i></a></li>
-                            </ul>
-                        </div>
-                        <h2 class="product-title"><a href="product-details.html">Antiseptic Spray</a></h2>
-                        <h2 class="product-title">Brand: Vamol</h2>
-                        <h2 class="product-title">Manufacturer: Vamol Pharma</h2>
-                        <div class="product-price">
-                            <span>$129.00</span>
-                            <del>$140.00</del>
-                        </div>
-                        <a href="#" class="product-price">Add To Cart</a>
-                    </div>
-                </div>
-            </div>
-            <!-- small-product-item -->
-            <div class="col-lg-4 col-md-6 col-12">
-                <div class="ltn__small-product-item">
-                    <div class="small-product-item-img">
-                        <a href="product-details.html"><img src="{{ asset('frontend/img/product/1.png') }}"
-                                alt="Image"></a>
-                    </div>
-                    <div class="small-product-item-info">
-                        <div class="product-ratting">
-                            <ul>
-                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-                                <li><a href="#"><i class="far fa-star"></i></a></li>
-                            </ul>
-                        </div>
-                        <h2 class="product-title"><a href="product-details.html">Antiseptic Spray</a></h2>
-                        <h2 class="product-title">Brand: Vamol</h2>
-                        <h2 class="product-title">Manufacturer: Vamol Pharma</h2>
-                        <div class="product-price">
-                            <span>$129.00</span>
-                            <del>$140.00</del>
-                        </div>
-                        <a href="#" class="product-price">Add To Cart</a>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-    </div>
-</div>
-<!-- SMALL PRODUCT LIST AREA END -->
+
 @endsection

@@ -35,6 +35,7 @@ class MedicineController extends Controller
         $medicine_categories = MedicineCategory::all();
         $medicine_companies = MedicineCompany::all();
         $medicine_brands = MedicineBrand::all();
+        
         return view('admin.medicine.create',compact('medicine_types','ages','body_parts','medicine_formulaes','medicine_categories','medicine_companies','medicine_brands'));
     }
 
@@ -54,7 +55,6 @@ class MedicineController extends Controller
     public function store(Request $request){
         // dd($request->all());
         $request->validate([
-            'name' => 'required|unique:medicines',
             'sku' => 'unique:medicines',
             'gender' => 'required',
             'stock' => 'required',
@@ -68,8 +68,8 @@ class MedicineController extends Controller
             'medicine_company' => 'required',
             'medicine_brand' => 'required',
             'image1' => 'required|mimes:jpg,jpeg,png,bmp,gif',
-            'image2' => 'required|mimes:jpg,jpeg,png,bmp,gif',
-            'image3' => 'required|mimes:jpg,jpeg,png,bmp,gif',
+            'image2' => 'mimes:jpg,jpeg,png,bmp,gif',
+            'image3' => 'mimes:jpg,jpeg,png,bmp,gif',
             'price' => 'required',
         ]);
 
@@ -84,12 +84,18 @@ class MedicineController extends Controller
         }
         
         $image1 = $this->uploadFile($request, 'image1');
-        $image2 = $this->uploadFile($request, 'image2');
-        $image3 = $this->uploadFile($request, 'image3');
+        if($request->image2){
+            $image2 = $this->uploadFile($request, 'image2');
+        }
+        if($request->image3){
+            $image3 = $this->uploadFile($request, 'image3');
+        }
+
+        $name = MedicineBrand::find($request->medicine_brand);
 
         $medicine = Medicine::create([ 
-            'name' => $request->name,
-            'slug' => Str::slug($request->name),
+            'name' => $name->brand,
+            'slug' => Str::slug($name->brand),
             'sku' => $sku,
             'gender' => $request->gender,
             'medicine_type_id' => $request->medicine_type,
@@ -100,8 +106,8 @@ class MedicineController extends Controller
             'medicine_brand_id' => $request->medicine_brand,
             'medicine_category_id' => $request->medicine_category,
             'image1' => $image1,
-            'image2' => $image2,
-            'image3' => $image3,
+            'image2' => $image2 ?? null,
+            'image3' => $image3 ?? null,
             'is_featured' => $is_featured,
             'is_onsale' => $is_onsale,
             'price' => $request->price,
@@ -111,7 +117,6 @@ class MedicineController extends Controller
             'created_by' => $user->id,
 
             ]);
-
             if($medicine){
            
                 $medicine->dosages()->attach($request->dosage);
@@ -149,7 +154,6 @@ class MedicineController extends Controller
     public function update(Request $request){
        
         $request->validate([
-            'name' => 'required|unique:medicines,name,'.$request->id,
             'sku' => 'unique:medicines,sku,'.$request->id,
             'gender' => 'required',
             'stock' => 'required',
@@ -197,8 +201,10 @@ class MedicineController extends Controller
             $image3 = $this->uploadFile($request, 'image3');
         }
 
-        $medicine->name = $request->name;
-        $medicine->slug = Str::slug($request->name);
+        $name = MedicineBrand::find($request->medicine_brand);
+        
+        $medicine->name = $name->brand;
+        $medicine->slug = Str::slug($name->brand);
         $medicine->sku = $request->sku;
         $medicine->gender = $request->gender;
         $medicine->medicine_type_id = $request->medicine_type;

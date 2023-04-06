@@ -2,8 +2,12 @@
 
 @section('title','Home')
 
+@section('css')
+  
+@endsection
+
 @section('content')
-    <!-- Main AREA START (slider-3) -->
+    <!-- Widegets Area -->
     <div class="ltn__contact-address-area pt-90 pb-90" >
         <div class="container">
             <div class="row">
@@ -138,8 +142,7 @@
                                                         <div class="product-hover-action">
                                                             <ul>
                                                                 <li>
-                                                                    <a href="#" title="Add to Cart" data-bs-toggle="modal"
-                                                                        data-bs-target="#add_to_cart_modal">
+                                                                    <a href="#" title="Add to Cart" id="addtocart" data-id="{{ $medicine->id }}">
                                                                         <i class="fas fa-shopping-cart"></i>
                                                                     </a>
                                                                 </li>
@@ -148,21 +151,28 @@
                                                     </div>
                                                     <div class="product-info">
                                                         <div class="product-ratting">
+                                                            @php
+                                                            $averageRating = $medicine->reviews()->avg('rating');
+                                                            @endphp
                                                             <ul>
-                                                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                                <li><a href="#"><i class="fas fa-star-half-alt"></i></a>
-                                                                </li>
-                                                                <li><a href="#"><i class="far fa-star"></i></a></li>
-                                                                <li class="review-total"> <a href="#"> (24)</a></li>
+                                                                @for ($i = 1; $i <= 5; $i++)
+                                                                    @if ($i <= $averageRating)
+                                                                        <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                                    @elseif ($i == ceil($averageRating))
+                                                                        <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                                                    @else
+                                                                        <li><a href="#"><i class="far fa-star"></i></a></li>
+                                                                    @endif
+                                                                @endfor
                                                             </ul>
                                                         </div>
                                                         <h2 class="product-title"><a href="{{ url('shop/'.$medicine->slug) }}">{{ $medicine->name }}</a></h2>
                                                         <div class="product-price">
-                                                            <span>{{ $medicine->price }}</span>
                                                             @if($medicine->sale_price)
-                                                                <del>{{ $medicine->sale_price }}</del>
+                                                                <span>{{ $medicine->sale_price }}</span>
+                                                                <del>{{ $medicine->price }}</del>
+                                                            @else
+                                                                <span>{{ $medicine->price }}</span>
                                                             @endif
                                                         </div>
                                                     </div>
@@ -214,8 +224,7 @@
                                     <ul>
                                         
                                         <li>
-                                            <a href="#" title="Add to Cart" data-bs-toggle="modal"
-                                                data-bs-target="#">
+                                            <a href="#" title="Add to Cart" id="addtocart" data-id="{{ $sale->id }}">
                                                 <i class="fas fa-shopping-cart"></i>
                                             </a>
                                         </li>
@@ -225,18 +234,29 @@
                             </div>
                             <div class="product-info">
                                 <div class="product-ratting">
+                                    @php
+                                        $averageRating = $sale->reviews()->avg('rating');
+                                    @endphp
                                     <ul>
-                                        <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                        <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                        <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                        <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-                                        <li><a href="#"><i class="far fa-star"></i></a></li>
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            @if ($i <= $averageRating)
+                                                <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                            @elseif ($i == ceil($averageRating))
+                                                <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                            @else
+                                                <li><a href="#"><i class="far fa-star"></i></a></li>
+                                            @endif
+                                        @endfor
                                     </ul>
                                 </div>
                                 <h2 class="product-title"><a href="{{ url('shop/'.$sale->slug) }}">{{ $sale->name }}</a></h2>
                                 <div class="product-price">
-                                    <span>{{ $sale->price }}</span>
-                                    <del>{{ $sale->sale_price }}</del>
+                                    @if($sale->sale_price)
+                                        <span>{{ $sale->sale_price }}</span>
+                                        <del>{{ $sale->price }}</del>
+                                    @else
+                                        <span>{{ $sale->price }}</span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -269,12 +289,19 @@
                             </div>
                             <div class="small-product-item-info">
                                 <div class="product-ratting">
+                                    @php
+                                        $averageRating = $featured->reviews()->avg('rating');
+                                    @endphp
                                     <ul>
-                                        <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                        <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                        <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                        <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-                                        <li><a href="#"><i class="far fa-star"></i></a></li>
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            @if ($i <= $averageRating)
+                                                <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                            @elseif ($i == ceil($averageRating))
+                                                <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                            @else
+                                                <li><a href="#"><i class="far fa-star"></i></a></li>
+                                            @endif
+                                        @endfor
                                     </ul>
                                 </div>
                                 <h2 class="product-title"><a href="{{ url('shop/'.$featured->slug) }}">{{ $featured->name }}</a></h2>
@@ -304,7 +331,8 @@
     @include('layouts.recent-blogs')
     <!-- BLOG AREA END -->
 
-    <!-- Product Modals  -->
-    @include('layouts.product-modals')
-    <!-- Product End  -->
+@endsection
+
+@section('javascript')
+    
 @endsection

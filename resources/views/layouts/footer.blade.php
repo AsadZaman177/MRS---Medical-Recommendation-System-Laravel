@@ -38,11 +38,11 @@
                         <h4 class="footer-title">Company</h4>
                         <div class="footer-menu">
                             <ul>
-                                <li><a href="about.html">About</a></li>
-                                <li><a href="shop.html">All Products</a></li>
-                                <li><a href="shop.html">Smart Doctor</a></li>
-                                <li><a href="faq.html">FAQ</a></li>
-                                <li><a href="contact.html">Contact us</a></li>
+                                <li><a href="{{ url('/about') }}">About</a></li>
+                                <li><a href="{{ url('/shop') }}">All Products</a></li>
+                                <li><a href="{{ url('/smart-doctor') }}">Smart Doctor</a></li>
+                                <li><a href="{{ url('/search-medcine') }}">Search Medicine</a></li>
+                                <li><a href="{{ url('/contact') }}">Contact us</a></li>
                             </ul>
                         </div>
                     </div>
@@ -53,11 +53,11 @@
                         <h4 class="footer-title">Customer Care</h4>
                         <div class="footer-menu">
                             <ul>
-                                <li><a href="login.html">Login</a></li>
-                                <li><a href="account.html">My account</a></li>
-                                <li><a href="order-tracking.html">Order tracking</a></li>
-                                <li><a href="blog.html">News</a></li>
-                                <li><a href="faq.html">Term & Conditions</a></li>
+                                <li><a href="{{ url('/login') }}">Login</a></li>
+                                <li><a href="{{ url('/dashboard') }}">My account</a></li>
+                                <li><a href="{{ url('track-order') }}">Order tracking</a></li>
+                                <li><a href="{{ url('/news') }}">News</a></li>
+                                <li><a href="{{ url('/terms-and-conditions') }}">Term & Conditions</a></li>
                             </ul>
                         </div>
                     </div>
@@ -95,7 +95,7 @@
                             </ul>
                         </div>
                         <h5 class="mt-30">We Accept</h5>
-                        <img src="{{ asset('images/'.$genral->footer_payment) }}" alt="Payment Image">
+                        <img src="{{ asset('images/'.'/'.$genral->footer_payment) }}" alt="Payment Image">
                     </div>
                 </div>
 

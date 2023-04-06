@@ -48,9 +48,14 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="name">Name</label>
-                                            <input type="text" class="form-control {{ $errors -> has('name') ? 'is-invalid' : '' }}" name="name" value="{{ $medicine->name }}" id="name" placeholder="E.g Panadole 100mg">
-                                            @error('name')
+                                            <label for="medicine_brand">Medicine brand</label>
+                                            <select class="select2 {{ $errors -> has('medicine_brand') ? 'is-invalid' : '' }}" name="medicine_brand" id="medicine_brand" style="width: 100%;">
+                                                <option value="">Select Medicine Brand</option>
+                                                @foreach ($medicine_brands as $brand)
+                                                    <option @if($medicine->medicine_brand_id == $brand->id) selected @endif value="{{ $brand->id }}">{{ $brand->brand }}</option>
+                                                @endforeach  
+                                            </select>
+                                            @error('medicine_brand')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -238,20 +243,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="medicine_brand">Medicine brand</label>
-                                            <select class="select2 {{ $errors -> has('medicine_brand') ? 'is-invalid' : '' }}" name="medicine_brand" id="medicine_brand" style="width: 100%;">
-                                                <option value="">Select Medicine Brand</option>
-                                                @foreach ($medicine_brands as $brand)
-                                                    <option @if($medicine->medicine_brand_id == $brand->id) selected @endif value="{{ $brand->id }}">{{ $brand->brand }}</option>
-                                                @endforeach  
-                                            </select>
-                                            @error('medicine_brand')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
+                                        
                                     </div>
                                 </div>
 

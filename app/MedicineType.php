@@ -8,3 +8,5 @@ class MedicineType extends Model
 {
     protected $fillable = ['type'];
 }
+
+

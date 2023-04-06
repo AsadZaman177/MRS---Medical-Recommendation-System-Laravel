@@ -122,7 +122,7 @@
          baseUrl = {!! json_encode(url('/')) !!}
 
      </script>
-     <script>
+    <script>
             @if(Session::has('message'))
                 toastr.options =
                 {

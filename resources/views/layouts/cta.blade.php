@@ -7,7 +7,7 @@
                         <h1>{{ $genral->cta_text }}</h1>
                     </div>
                     <div class="btn-wrapper">
-                        <a class="btn btn-effect-3 btn-white" href="{{ $genral->cta_btn_link }}">{{ $genral->cta_btn_text }} <i
+                        <a class="btn btn-effect-3 btn-white" href="{{ url('/shop') }}">{{ $genral->cta_btn_text }} <i
                                 class="icon-next"></i></a>
                     </div>
                 </div>

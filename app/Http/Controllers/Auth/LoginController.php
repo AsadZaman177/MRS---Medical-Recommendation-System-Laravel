@@ -49,7 +49,8 @@ class LoginController extends Controller
                 return redirect('/dashboard');
             }
             else{
-                return redirect('user/dashboard');
+                return redirect('/checkout');
             }
+
     }
 }
